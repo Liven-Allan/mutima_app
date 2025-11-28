@@ -7,8 +7,8 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - MONGO_URI=mongodb+srv://mutima_user:Allan2000@mutima.aoh7lat.mongodb.net/mutima_db?retryWrites=true&w=majority&appName=Mutima
-      - JWT_SECRET=99f96c4010677cc5b02793f30f598597052575c53a5ceac6e5aeec1ed563ce6e9e696c66d453295934e1c935bc9eb66f0ef6b780e260cceac78b5d164c76a32a
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
       - PORT=5000
     restart: unless-stopped
 
