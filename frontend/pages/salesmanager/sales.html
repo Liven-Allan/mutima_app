@@ -1,0 +1,1108 @@
+<!--
+=========================================================
+* Soft UI Dashboard 3 - v1.1.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
+* Copyright 2024 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
+  <title>
+    Sales Management
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,800" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+  <!-- Nucleo Icons -->
+  <link href="https://demos.creative-tim.com/soft-ui-dashboard/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="https://demos.creative-tim.com/soft-ui-dashboard/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../../assets/css/soft-ui-dashboard.css?v=1.1.0" rel="stylesheet" />
+  <style>
+    /* Ensure sidebar navigation is scrollable */
+    #sidenav-main .navbar-nav {
+      max-height: calc(100vh - 200px) !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+    }
+    
+    /* Ensure all nav items are visible */
+    #sidenav-main .nav-item {
+      display: block !important;
+    }
+    
+    /* Additional rules to ensure Item Loss menu is visible */
+    .sidenav .navbar-nav {
+      max-height: calc(100vh - 200px) !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+    }
+    
+    .sidenav .nav-item {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    
+    /* Force all navigation items to be visible */
+    .navbar-nav .nav-item {
+      display: block !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure the Item Loss specific menu item is visible */
+    .nav-item a[href*="item-loss"] {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    
+    /* Override any potential hiding styles */
+    .sidenav-main .navbar-nav .nav-item {
+      display: block !important;
+      height: auto !important;
+      min-height: auto !important;
+    }
+    
+    /* Fix layout for Item Loss menu item - ensure text is to the right of icon */
+    .nav-item a[href*="item-loss"] {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      flex-wrap: nowrap !important;
+    }
+    
+    /* Ensure all nav links have proper flex layout */
+    .sidenav .nav-link {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      flex-wrap: nowrap !important;
+    }
+    
+    /* Ensure icon and text are properly aligned */
+    .nav-link .icon {
+      flex-shrink: 0 !important;
+      margin-right: 0.5rem !important;
+    }
+    
+    .nav-link .nav-link-text {
+      flex: 1 !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+    }
+    
+    /* Responsive table styles for Recent Sales and Top Performing Items */
+    .table-responsive {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Ensure tables maintain proper spacing on mobile */
+    @media (max-width: 768px) {
+      .table-responsive {
+        border: 1px solid #dee2e6;
+        border-radius: 0.375rem;
+      }
+      
+      .table-responsive table {
+        margin-bottom: 0;
+        min-width: 600px; /* Ensure table doesn't get too compressed */
+      }
+      
+      /* Improve button layout on mobile */
+      .card-header .row .col-6:last-child {
+        margin-top: 0.5rem;
+      }
+      
+      .card-header .row .col-6:last-child .btn {
+        margin-bottom: 0.25rem;
+        width: 100%;
+      }
+    }
+    
+    /* For very small screens, make buttons stack vertically */
+    @media (max-width: 576px) {
+      .card-header .row .col-6:last-child {
+        text-align: left !important;
+      }
+      
+      .card-header .row .col-6:last-child .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 0.5rem;
+      }
+    }
+  </style>
+  <!-- Nepcha Analytics (nepcha.com) -->
+  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+  <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+</head>
+
+<body class="g-sidenav-show  bg-gray-100">
+  <script src="../../assets/js/config.js"></script> 
+  <script>
+    // Redirect to sign-in if not authenticated
+    (function() {
+      var token = localStorage.getItem('authToken');
+      if (!token) {
+        window.location.href = '../sign-in.html';
+      }
+    })();
+  </script>
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+    <div class="sidenav-header">
+      <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+      <a class="navbar-brand m-0"  target="_blank">
+        
+        <span class="ms-1 font-weight-bold">Sales Manager Dashboard</span>
+      </a>
+    </div>
+    <hr class="horizontal dark mt-0">
+    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+      <ul class="navbar-nav" style="max-height: calc(100vh - 200px); overflow-y: auto;">
+        <li class="nav-item">
+          <a class="nav-link" href="../salesmanager/dashboard.html">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>shop </title>
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g transform="translate(-1716.000000, -439.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                    <g transform="translate(1716.000000, 291.000000)">
+                      <g transform="translate(0.000000, 148.000000)">
+                        <path class="color-background opacity-6" d="M46.7199583,10.7414583 L40.8449583,0.949791667 C40.4909749,0.360605034 39.8540131,0 39.1666667,0 L7.83333333,0 C7.1459869,0 6.50902508,0.360605034 6.15504167,0.949791667 L0.280041667,10.7414583 C0.0969176761,11.0460037 -1.23209662e-05,11.3946378 -1.23209662e-05,11.75 C-0.00758042603,16.0663731 3.48367543,19.5725301 7.80004167,19.5833333 L7.81570833,19.5833333 C9.75003686,19.5882688 11.6168794,18.8726691 13.0522917,17.5760417 C16.0171492,20.2556967 20.5292675,20.2556967 23.494125,17.5760417 C26.4604562,20.2616016 30.9794188,20.2616016 33.94575,17.5760417 C36.2421905,19.6477597 39.5441143,20.1708521 42.3684437,18.9103691 C45.1927731,17.649886 47.0084685,14.8428276 47.0000295,11.75 C47.0000295,11.3946378 46.9030823,11.0460037 46.7199583,10.7414583 Z"></path>
+                        <path class="color-background" d="M39.198,22.4912623 C37.3776246,22.4928106 35.5817531,22.0149171 33.951625,21.0951667 L33.92225,21.1107282 C31.1430221,22.6838032 27.9255001,22.9318916 24.9844167,21.7998837 C24.4750389,21.605469 23.9777983,21.3722567 23.4960833,21.1018359 L23.4745417,21.1129513 C20.6961809,22.6871153 17.4786145,22.9344611 14.5386667,21.7998837 C14.029926,21.6054643 13.533337,21.3722507 13.0522917,21.1018359 C11.4250962,22.0190609 9.63246555,22.4947009 7.81570833,22.4912623 C7.16510551,22.4842162 6.51607673,22.4173045 5.875,22.2911849 L5.875,44.7220845 C5.875,45.9498589 6.7517757,46.9451667 7.83333333,46.9451667 L19.5833333,46.9451667 L19.5833333,33.6066734 L27.4166667,33.6066734 L27.4166667,46.9451667 L39.1666667,46.9451667 C40.2482243,46.9451667 41.125,45.9498589 41.125,44.7220845 L41.125,22.2822926 C40.4887822,22.4116582 39.8442868,22.4815492 39.198,22.4912623 Z"></path>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <span class="nav-link-text ms-1">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../salesmanager/inventory.html">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fas fa-boxes text-dark"></i>
+            </div>
+            <span class="nav-link-text ms-1">Inventory</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../salesmanager/item-loss.html">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fas fa-exclamation-triangle text-dark"></i>
+            </div>
+            <span class="nav-link-text ms-1">Item Loss</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="../salesmanager/sales.html">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fas fa-chart-line text-dark"></i>
+            </div>
+            <span class="nav-link-text ms-1">Sales</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../salesmanager/credit-management.html">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fas fa-credit-card text-dark"></i>
+            </div>
+            <span class="nav-link-text ms-1">Credit Management</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../salesmanager/cash-utilization.html">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fas fa-money-bill-wave text-dark"></i>
+            </div>
+            <span class="nav-link-text ms-1">Cash Utilization</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../salesmanager/account-management.html">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fas fa-users-cog text-dark"></i>
+            </div>
+            <span class="nav-link-text ms-1">Account Management</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../salesmanager/settings.html">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fas fa-cog text-dark"></i>
+            </div>
+            <span class="nav-link-text ms-1">Settings</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Sales Management</li>
+          </ol>
+          <h6 class="font-weight-bolder mb-0">Sales Management</h6>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <div class="input-group">
+             
+            </div>
+          </div>
+          <ul class="navbar-nav  justify-content-end">
+            <li class="nav-item d-flex align-items-center">
+              <a href="javascript:;" id="signOutLink" class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-user me-sm-1"></i>
+                <span class="d-sm-inline d-none">Sign Out</span>
+              </a>
+            </li>
+            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                <div class="sidenav-toggler-inner">
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      <!-- Add your dashboard content here -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>Sales Overview</h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <!-- Add your content here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sales Overview Section -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h4>Sales Overview</h4>
+              <p class="text-sm text-secondary mb-0">Monitor Sales performance and team activity</p>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <!-- Today's Sales Card -->
+                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+                  <div class="card h-100">
+                    <div class="card-body text-center">
+                      <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg mb-3">
+                        <i class="fas fa-money-bill-wave text-white opacity-10"></i>
+                      </div>
+                      <h5 class="mt-3">Today's Sales</h5>
+                      <h3 class="font-weight-bolder mb-3" id="todaysSalesValue">shs:</h3>
+                      <button class="btn bg-gradient-primary btn-sm" data-bs-toggle="modal" data-bs-target="#todaysSalesModal">View Details</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Customers Today Card -->
+                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+                  <div class="card h-100">
+                    <div class="card-body text-center">
+                      <div class="icon icon-shape icon-lg bg-gradient-success shadow text-center border-radius-lg mb-3">
+                        <i class="fas fa-users text-white opacity-10"></i>
+                      </div>
+                      <h5 class="mt-3">Customers Today</h5>
+                      <h3 class="font-weight-bolder mb-3" id="customersTodayValue">24</h3>
+                      <button class="btn bg-gradient-success btn-sm" data-bs-toggle="modal" data-bs-target="#customersTodayModal">View Details</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Today's Profits Card -->
+                <div class="col-xl-4 col-sm-6">
+                  <div class="card h-100">
+                    <div class="card-body text-center">
+                      <div class="icon icon-shape icon-lg bg-gradient-info shadow text-center border-radius-lg mb-3">
+                        <i class="fas fa-chart-line text-white opacity-10"></i>
+                      </div>
+                      <h5 class="mt-3">Today's Profits</h5>
+                      <h3 class="font-weight-bolder mb-3" id="todaysProfitsValue">shs:</h3>
+                      <button class="btn bg-gradient-info btn-sm" data-bs-toggle="modal" data-bs-target="#todaysProfitModal">View Details</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Sales Section -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <h4>Recent Sales</h4>
+                  <div id="recentSalesFilterStatus" class="mt-1" style="display: none;">
+                    <span class="badge bg-info text-white">
+                      <i class="fas fa-filter me-1"></i>
+                      <span id="recentSalesFilterText">Filtered</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 text-md-end mt-2 mt-md-0">
+                  <button class="btn bg-gradient-secondary btn-sm me-2" id="recentSalesSelectDateBtn" data-bs-toggle="modal" data-bs-target="#recentSalesPeriodModal">
+                    <i class="fas fa-calendar me-1"></i> Select Date
+                  </button>
+                  <input type="date" id="recentSalesDateInput" style="display:none; margin-left:8px;" />
+                  <button class="btn bg-gradient-info btn-sm" id="recentSalesExportBtn">
+                    <i class="fas fa-file-export me-1"></i> Export
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="container-fluid">
+                <div class="table-responsive">
+                  <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Items</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Profit</th>
+                      </tr>
+                    </thead>
+                    <tbody id="recentSalesTableBody">
+                    </tbody>
+                  </table>
+                </div>
+                <!-- Pagination Controls for Recent Sales -->
+                <div class="d-flex justify-content-between align-items-center mt-3" id="recentSalesPaginationControls">
+                  <div>
+                    <span id="recentSalesShowingText" class="text-sm text-secondary">Showing 1 to 4 of 0 items</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <button class="btn btn-sm btn-outline-secondary me-2" id="recentSalesPrevPage" title="Previous"><i class="fas fa-chevron-left"></i></button>
+                    <span id="recentSalesCurrentPageInfo" class="badge bg-primary px-3 py-2">Page 1 of 1</span>
+                    <button class="btn btn-sm btn-outline-secondary ms-2" id="recentSalesNextPage" title="Next"><i class="fas fa-chevron-right"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sales Analytics Section -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h4>Sales Analytics</h4>
+              <p class="text-sm text-secondary mb-0">Monitor sales performance and trends</p>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <!-- Sales Bargraph Card -->
+                <div class="col-lg-6 col-12">
+                  <div class="card h-100">
+                    <div class="card-header pb-0">
+                      <div class="row">
+                        <div class="col-6">
+                          <h4>Sales Bargraph</h4>
+                        </div>
+                        <div class="col-6 text-end">
+                          <button class="btn bg-gradient-secondary btn-sm" id="salesBargraphSelectDateBtn">
+                            <i class="fas fa-calendar me-1"></i> Select Date
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div id="salesBargraphDateRange" class="mb-3"
+                        style="display:none; position:absolute; z-index:1050; background:#fff; border:1px solid #ddd; box-shadow:0 2px 12px rgba(0,0,0,0.15); padding:16px; border-radius:8px; min-width:340px; left:0; right:auto; max-width:95vw;">
+                        <label class="form-label mb-1">Select Date Range:</label>
+                        <div id="salesBargraphRangesContainer" style="max-height:220px; overflow-y:auto; display:flex; flex-direction:column; gap:6px;">
+                          <!-- Range buttons will be injected here by JS -->
+                        </div>
+                        <button class="btn btn-sm btn-primary mt-2" id="salesBargraphApplyBtn">Apply</button>
+                      </div>
+                      <div style="height: 300px;">
+                        <canvas id="sales-bargraph"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Sales Trend Card -->
+                <div class="col-lg-6 col-12">
+                  <div class="card h-100">
+                    <div class="card-header pb-0">
+                      <div class="row">
+                        <div class="col-6">
+                          <h4>Sales Trend</h4>
+                        </div>
+                        <div class="col-6 text-end">
+                          <button class="btn bg-gradient-secondary btn-sm" id="salesTrendSelectMonthBtn" data-bs-toggle="modal" data-bs-target="#salesTrendPeriodModal">
+                            <i class="fas fa-calendar me-1"></i> Select Month
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div style="height: 200px;">
+                        <canvas id="sales-trend"></canvas>
+                      </div>
+                      <div class="mt-4">
+                        <h6 class="mb-3">Available Reports</h6>
+                        <div class="row">
+                          <div class="col-6">
+                            <h6 class="mb-0">Monthly Sales Summary</h6>
+                            <p class="text-sm text-secondary mb-0" id="salesTrendSelectedMonthLabel">All Time</p>
+                          </div>
+                          <div class="col-6 text-end">
+                            <button class="btn bg-gradient-info btn-sm" id="salesTrendViewBtn">
+                              <i class="fas fa-eye me-1"></i> View
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Performing Items Section -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <h4>Top Performing Items</h4>
+                  <p class="text-sm text-secondary mb-0">Items ranked by sales performance (quantity and revenue)</p>
+                  <div id="topItemsFilterStatus" class="mt-1" style="display: none;">
+                    <span class="badge bg-info text-white">
+                      <i class="fas fa-filter me-1"></i>
+                      <span id="topItemsFilterText">Filtered</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 text-md-end mt-2 mt-md-0">
+                  <button class="btn bg-gradient-secondary btn-sm me-2" id="topItemsSelectDateBtn" data-bs-toggle="modal" data-bs-target="#topItemsPeriodModal">
+                    <i class="fas fa-calendar me-1"></i> Select Period
+                  </button>
+                  <button class="btn bg-gradient-info btn-sm" id="topItemsExportBtn">
+                    <i class="fas fa-file-export me-1"></i> Export
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="container-fluid">
+                <div class="table-responsive">
+                  <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Rank</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Item Name</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Quantity Sold</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total Revenue</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Performance Score</th>
+                      </tr>
+                    </thead>
+                    <tbody id="topItemsTableBody">
+                      <!-- Top performing items will be loaded here -->
+                    </tbody>
+                  </table>
+                </div>
+                <!-- Pagination Controls for Top Performing Items -->
+                <div class="d-flex justify-content-between align-items-center mt-3" id="topItemsPaginationControls">
+                  <div>
+                    <span id="topItemsShowingText" class="text-sm text-secondary">Showing 1 to 4 of 0 items</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <button class="btn btn-sm btn-outline-secondary me-2" id="topItemsPrevPage" title="Previous"><i class="fas fa-chevron-left"></i></button>
+                    <span id="topItemsCurrentPageInfo" class="badge bg-primary px-3 py-2">Page 1 of 1</span>
+                    <button class="btn btn-sm btn-outline-secondary ms-2" id="topItemsNextPage" title="Next"><i class="fas fa-chevron-right"></i></button>
+                  </div>
+                </div>
+                <!-- Loading indicator -->
+                <div id="topItemsLoading" class="text-center py-4" style="display: none;">
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                  <p class="mt-2 text-muted">Loading top performing items...</p>
+                </div>
+                <!-- No data message -->
+                <div id="topItemsNoData" class="text-center py-4" style="display: none;">
+                  <i class="fas fa-chart-bar text-muted" style="font-size: 3rem;"></i>
+                  <p class="mt-2 text-muted">No sales data available for the selected period</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <!-- Core JS Files -->
+  <script src="../../assets/js/core/popper.min.js"></script>
+  <script src="../../assets/js/core/bootstrap.min.js"></script>
+  <script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../../assets/js/plugins/chartjs.min.js"></script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Soft Dashboard -->
+  <script src="../../assets/js/soft-ui-dashboard.min.js?v=1.1.0"></script>
+  <!-- Add Chart.js initialization scripts -->
+  <!-- Today's Sales Report Modal -->
+  <div class="modal fade" id="todaysSalesModal" tabindex="-1" aria-labelledby="todaysSalesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="todaysSalesModalLabel">
+            <i class="fas fa-file-invoice-dollar me-2 text-primary"></i>Today's Sales Report
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Date Selection Area -->
+          <div class="mb-4">
+            <label for="salesReportDate" class="form-label"><i class="fas fa-calendar-alt me-2 text-info"></i>Select Date</label>
+            <input type="date" class="form-control w-auto d-inline-block" id="salesReportDate" value="">
+          </div>
+          <!-- Sales Table Section -->
+          <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer Name</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Items</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+        
+              </tbody>
+            </table>
+          </div>
+          <!-- Pagination Controls for Today's Sales Report -->
+          <div class="d-flex justify-content-between align-items-center mt-3" id="salesReportPaginationControls">
+            <div>
+              <span id="salesReportShowingText" class="text-sm text-secondary">Showing 1 to 4 of 0 items</span>
+            </div>
+            <div class="d-flex align-items-center">
+              <button class="btn btn-sm btn-outline-secondary me-2" id="salesReportPrevPage" title="Previous"><i class="fas fa-chevron-left"></i></button>
+              <span id="salesReportCurrentPageInfo" class="badge bg-primary px-3 py-2">Page 1 of 1</span>
+              <button class="btn btn-sm btn-outline-secondary ms-2" id="salesReportNextPage" title="Next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-end">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fas fa-times me-2"></i>Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Customers Today Modal -->
+  <div class="modal fade" id="customersTodayModal" tabindex="-1" aria-labelledby="customersTodayModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="customersTodayModalLabel">
+            <i class="fas fa-users me-2 text-success"></i>Customers Today
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Date Selection Area -->
+          <div class="mb-4">
+            <label for="customersTodayDate" class="form-label"><i class="fas fa-calendar-alt me-2 text-info"></i>Select Date</label>
+            <input type="date" class="form-control w-auto d-inline-block" id="customersTodayDate" value="">
+          </div>
+          <!-- Customers Table Section -->
+          <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Purchase Amount</th>
+                </tr>
+              </thead>
+              <tbody id="customersTodayTableBody">
+                
+              </tbody>
+            </table>
+          </div>
+          <!-- Pagination Controls for Customers Today -->
+          <div class="d-flex justify-content-between align-items-center mt-3" id="customersTodayPaginationControls">
+            <div>
+              <span id="customersTodayShowingText" class="text-sm text-secondary">Showing 1 to 4 of 0 items</span>
+            </div>
+            <div class="d-flex align-items-center">
+              <button class="btn btn-sm btn-outline-secondary me-2" id="customersTodayPrevPage" title="Previous"><i class="fas fa-chevron-left"></i></button>
+              <span id="customersTodayCurrentPageInfo" class="badge bg-success px-3 py-2">Page 1 of 1</span>
+              <button class="btn btn-sm btn-outline-secondary ms-2" id="customersTodayNextPage" title="Next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-end">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fas fa-times me-2"></i>Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Today's Profit Report Modal -->
+  <div class="modal fade" id="todaysProfitModal" tabindex="-1" aria-labelledby="todaysProfitModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="todaysProfitModalLabel">
+            <i class="fas fa-chart-line me-2 text-info"></i>Today's Profit Report
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Date Selection Area -->
+          <div class="mb-4">
+            <label for="profitReportDate" class="form-label"><i class="fas fa-calendar-alt me-2 text-info"></i>Select Date</label>
+            <input type="date" class="form-control w-auto d-inline-block" id="profitReportDate" value="">
+          </div>
+          <!-- Profit Table Section -->
+          <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Quantity</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Buying Price</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Selling Price</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total Cost</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total Revenue</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Profit</th>
+                </tr>
+              </thead>
+              <tbody id="profitReportTableBody">
+               
+              </tbody>
+            </table>
+          </div>
+          <!-- Pagination Controls for Profit Report -->
+          <div class="d-flex justify-content-between align-items-center mt-3" id="profitReportPaginationControls">
+            <div>
+              <span id="profitReportShowingText" class="text-sm text-secondary">Showing 1 to 4 of 0 items</span>
+            </div>
+            <div class="d-flex align-items-center">
+              <button class="btn btn-sm btn-outline-secondary me-2" id="profitReportPrevPage" title="Previous"><i class="fas fa-chevron-left"></i></button>
+              <span id="profitReportCurrentPageInfo" class="badge bg-primary px-3 py-2">Page 1 of 1</span>
+              <button class="btn btn-sm btn-outline-secondary ms-2" id="profitReportNextPage" title="Next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>
+          <!-- Summation Row -->
+          <div class="row mt-3">
+            <div class="col-md-5 col-lg-4">
+              <div class="card card-body p-3 bg-gray-100">
+                <div class="row">
+                  <div class="col-5 text-end"><strong>Total Cost:</strong></div>
+                  <div class="col-7" id="profitReportTotalCost">shs:</div>
+                </div>
+                <div class="row">
+                  <div class="col-5 text-end"><strong>Total Revenue:</strong></div>
+                  <div class="col-7" id="profitReportTotalRevenue">shs:</div>
+                </div>
+                <div class="row">
+                  <div class="col-5 text-end"><strong>Profit:</strong></div>
+                  <div class="col-7" id="profitReportProfit">shs:</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-end">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fas fa-times me-2"></i>Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sales Trend Report Modal -->
+  <div class="modal fade" id="salesTrendReportModal" tabindex="-1" aria-labelledby="salesTrendReportModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="salesTrendReportModalLabel">
+            <i class="fas fa-chart-line me-2 text-info"></i>Monthly Sales Summary
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="salesTrendReportSingle" style="display:none;">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Month</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Year</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cost</th>
+                </tr>
+              </thead>
+              <tbody id="salesTrendReportSingleBody">
+                <!-- Single month row will be injected here -->
+              </tbody>
+            </table>
+          </div>
+          <div id="salesTrendReportTable" style="display:none;">
+            <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+              <table class="table align-items-center mb-0">
+                <thead>
+                  <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Month</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Year</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cost</th>
+                  </tr>
+                </thead>
+                <tbody id="salesTrendReportTableBody">
+                  <!-- Paginated rows will be injected here -->
+                </tbody>
+              </table>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-3" id="salesTrendReportPaginationControls">
+              <div>
+                <span id="salesTrendReportShowingText" class="text-sm text-secondary">Showing 1 to 4 of 0 items</span>
+              </div>
+              <div class="d-flex align-items-center">
+                <button class="btn btn-sm btn-outline-secondary me-2" id="salesTrendReportPrevPage" title="Previous"><i class="fas fa-chevron-left"></i></button>
+                <span id="salesTrendReportCurrentPageInfo" class="badge bg-info px-3 py-2">Page 1 of 1</span>
+                <button class="btn btn-sm btn-outline-secondary ms-2" id="salesTrendReportNextPage" title="Next"><i class="fas fa-chevron-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-end">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fas fa-times me-2"></i>Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sales Trend Period Selection Modal -->
+  <div class="modal fade" id="salesTrendPeriodModal" tabindex="-1" aria-labelledby="salesTrendPeriodModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-gradient-info text-white">
+          <h5 class="modal-title" id="salesTrendPeriodModalLabel">
+            <i class="fas fa-calendar-alt me-2"></i>Select Period for Sales Trend
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="salesTrendYearSelect" class="form-label">
+                <i class="fas fa-calendar-year me-2 text-primary"></i>Year
+              </label>
+              <select class="form-select" id="salesTrendYearSelect">
+                <option value="">All Years</option>
+                <!-- Years will be populated by JavaScript -->
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="salesTrendMonthSelect" class="form-label">
+                <i class="fas fa-calendar-day me-2 text-success"></i>Month
+              </label>
+              <select class="form-select" id="salesTrendMonthSelect">
+                <option value="">All Months</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fas fa-times me-2"></i>Cancel
+          </button>
+          <button type="button" class="btn btn-info" id="salesTrendApplyPeriodBtn">
+            <i class="fas fa-check me-2"></i>Apply Filter
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Sales Period Selection Modal -->
+  <div class="modal fade" id="recentSalesPeriodModal" tabindex="-1" aria-labelledby="recentSalesPeriodModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-gradient-primary text-white">
+          <h5 class="modal-title" id="recentSalesPeriodModalLabel">
+            <i class="fas fa-calendar-alt me-2"></i>Select Period for Recent Sales
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="recentSalesYearSelect" class="form-label">
+                <i class="fas fa-calendar-year me-2 text-primary"></i>Year
+              </label>
+              <select class="form-select" id="recentSalesYearSelect">
+                <option value="">All Years</option>
+                <!-- Years will be populated by JavaScript -->
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="recentSalesMonthSelect" class="form-label">
+                <i class="fas fa-calendar-day me-2 text-success"></i>Month
+              </label>
+              <select class="form-select" id="recentSalesMonthSelect">
+                <option value="">All Months</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+              </select>
+            </div>
+          </div>
+          <div class="alert alert-info" role="alert">
+            <i class="fas fa-info-circle me-2"></i>
+            <strong>Tip:</strong> Select a specific year and month to filter recent sales for that period. Leave either field empty to see all data for the selected period.
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fas fa-times me-2"></i>Cancel
+          </button>
+          <button type="button" class="btn btn-primary" id="recentSalesApplyPeriodBtn">
+            <i class="fas fa-filter me-2"></i>Apply Filter
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Performing Items Period Selection Modal -->
+  <div class="modal fade" id="topItemsPeriodModal" tabindex="-1" aria-labelledby="topItemsPeriodModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-gradient-primary text-white">
+          <h5 class="modal-title" id="topItemsPeriodModalLabel">
+            <i class="fas fa-calendar-alt me-2"></i>Select Period for Top Performing Items
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="topItemsYearSelect" class="form-label">
+                <i class="fas fa-calendar-year me-2 text-primary"></i>Year
+              </label>
+              <select class="form-select" id="topItemsYearSelect">
+                <option value="">All Years</option>
+                <!-- Years will be populated by JavaScript -->
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="topItemsMonthSelect" class="form-label">
+                <i class="fas fa-calendar-day me-2 text-success"></i>Month
+              </label>
+              <select class="form-select" id="topItemsMonthSelect">
+                <option value="">All Months</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+              </select>
+            </div>
+          </div>
+          <div class="alert alert-info" role="alert">
+            <i class="fas fa-info-circle me-2"></i>
+            <strong>Tip:</strong> Select a specific year and month to filter top performing items for that period. Leave either field empty to see all data for the selected period.
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fas fa-times me-2"></i>Cancel
+          </button>
+          <button type="button" class="btn btn-primary" id="topItemsApplyPeriodBtn">
+            <i class="fas fa-filter me-2"></i>Apply Filter
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.0/jspdf.plugin.autotable.min.js"></script>
+  <script src="sales.js"></script>
+  <script>
+        // Simple notification function for user feedback
+        window.showNotification = function(message, type = 'info') {
+          // Create notification element
+          const notification = document.createElement('div');
+          notification.className = `alert alert-${type === 'success' ? 'success' : type === 'error' ? 'danger' : 'info'} alert-dismissible fade show position-fixed`;
+          notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+          notification.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          `;
+
+          // Add to page
+          document.body.appendChild(notification);
+
+          // Auto remove after 5 seconds
+          setTimeout(() => {
+            if (notification.parentNode) {
+              notification.remove();
+            }
+          }, 5000);
+        };
+
+        // Global modal cleanup function
+        window.cleanupModal = function(modalId) {
+          const modalElement = document.getElementById(modalId);
+          if (modalElement) {
+            // Remove modal classes
+            modalElement.classList.remove('show');
+            modalElement.style.display = 'none';
+            modalElement.setAttribute('aria-hidden', 'true');
+            modalElement.removeAttribute('aria-modal');
+            modalElement.removeAttribute('role');
+            
+            // Remove backdrop
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+              backdrop.remove();
+            }
+            
+            // Re-enable body scrolling
+            document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+          }
+        };
+
+// Wait for DOM to be fully loaded before setting up event listeners
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Sales Manager page loaded successfully');
+  
+  // Set up sign out functionality
+  const signOutLink = document.getElementById('signOutLink');
+  if (signOutLink) {
+    signOutLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      try {
+        localStorage.removeItem('authToken'); // Remove the token on sign out
+        window.location.href = '../sign-in.html';
+      } catch (error) {
+        console.error('Error during sign out:', error);
+        // Fallback redirect
+        window.location.href = '../sign-in.html';
+      }
+    });
+  }
+  
+  // Add error handling for any unhandled promise rejections
+  window.addEventListener('unhandledrejection', function(event) {
+    console.error('Unhandled promise rejection:', event.reason);
+    // Prevent the default browser behavior
+    event.preventDefault();
+  });
+  
+  // Add error handling for any uncaught errors
+  window.addEventListener('error', function(event) {
+    console.error('Uncaught error:', event.error);
+  });
+});
+
+// Ensure all async operations are properly handled
+window.addEventListener('load', function() {
+  console.log('Sales Manager page fully loaded');
+});
+</script>
+</body>
+
+</html> 

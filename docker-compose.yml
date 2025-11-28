@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: mutima_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - PORT=5000
+    # THIS SECTION IS NEW
+    # It maps your local folder to the container.
+    # If you change server.js, just restart the container, no build needed.
+    volumes:
+      - ./backend:/app
+      - /app/node_modules # This line protects the container's installed tools
+
+  frontend:
+    build: ./frontend
+    container_name: mutima_frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    # THIS SECTION IS NEW
+    # It mirrors your frontend folder. 
+    # Any change you make in HTML/CSS appears INSTANTLY in the browser.
+    volumes:
+      - ./frontend:/usr/share/nginx/html

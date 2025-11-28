@@ -1,0 +1,1071 @@
+<!--
+=========================================================
+* Soft UI Dashboard 3 - v1.1.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
+* Copyright 2024 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
+  <title>
+    Cash Utilization
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,800" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+  <!-- Nucleo Icons -->
+  <link href="https://demos.creative-tim.com/soft-ui-dashboard/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="https://demos.creative-tim.com/soft-ui-dashboard/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../../assets/css/soft-ui-dashboard.css?v=1.1.0" rel="stylesheet" />
+  <!-- jsPDF for PDF generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+  <style>
+    /* Ensure sidebar navigation is scrollable */
+    #sidenav-main .navbar-nav {
+      max-height: calc(100vh - 200px) !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+    }
+    
+    /* Ensure all nav items are visible */
+    #sidenav-main .nav-item {
+      display: block !important;
+    }
+  </style>
+  <!-- Nepcha Analytics (nepcha.com) -->
+  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+  <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+</head>
+
+<body class="g-sidenav-show  bg-gray-100">
+  <script src="../../assets/js/config.js"></script> 
+  <script>
+    // Redirect to sign-in if not authenticated
+    (function() {
+      var token = localStorage.getItem('authToken');
+      if (!token) {
+        window.location.href = '../sign-in.html';
+      }
+    })();
+  </script>
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+    <div class="sidenav-header">
+      <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+      <a class="navbar-brand m-0"  target="_blank">
+        
+        <span class="ms-1 font-weight-bold">Sales Manager Dashboard</span>
+      </a>
+    </div>
+    <hr class="horizontal dark mt-0">
+    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+      <ul class="navbar-nav" style="max-height: calc(100vh - 200px); overflow-y: auto;">
+        <li class="nav-item">
+          <a class="nav-link" href="../salesmanager/dashboard.html">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>shop </title>
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g transform="translate(-1716.000000, -439.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                    <g transform="translate(1716.000000, 291.000000)">
+                      <g transform="translate(0.000000, 148.000000)">
+                        <path class="color-background opacity-6" d="M46.7199583,10.7414583 L40.8449583,0.949791667 C40.4909749,0.360605034 39.8540131,0 39.1666667,0 L7.83333333,0 C7.1459869,0 6.50902508,0.360605034 6.15504167,0.949791667 L0.280041667,10.7414583 C0.0969176761,11.0460037 -1.23209662e-05,11.3946378 -1.23209662e-05,11.75 C-0.00758042603,16.0663731 3.48367543,19.5725301 7.80004167,19.5833333 L7.81570833,19.5833333 C9.75003686,19.5882688 11.6168794,18.8726691 13.0522917,17.5760417 C16.0171492,20.2556967 20.5292675,20.2556967 23.494125,17.5760417 C26.4604562,20.2616016 30.9794188,20.2616016 33.94575,17.5760417 C36.2421905,19.6477597 39.5441143,20.1708521 42.3684437,18.9103691 C45.1927731,17.649886 47.0084685,14.8428276 47.0000295,11.75 C47.0000295,11.3946378 46.9030823,11.0460037 46.7199583,10.7414583 Z"></path>
+                        <path class="color-background" d="M39.198,22.4912623 C37.3776246,22.4928106 35.5817531,22.0149171 33.951625,21.0951667 L33.92225,21.1107282 C31.1430221,22.6838032 27.9255001,22.9318916 24.9844167,21.7998837 C24.4750389,21.605469 23.9777983,21.3722567 23.4960833,21.1018359 L23.4745417,21.1129513 C20.6961809,22.6871153 17.4786145,22.9344611 14.5386667,21.7998837 C14.029926,21.6054643 13.533337,21.3722507 13.0522917,21.1018359 C11.4250962,22.0190609 9.63246555,22.4947009 7.81570833,22.4912623 C7.16510551,22.4842162 6.51607673,22.4173045 5.875,22.2911849 L5.875,44.7220845 C5.875,45.9498589 6.7517757,46.9451667 7.83333333,46.9451667 L19.5833333,46.9451667 L19.5833333,33.6066734 L27.4166667,33.6066734 L27.4166667,46.9451667 L39.1666667,46.9451667 C40.2482243,46.9451667 41.125,45.9498589 41.125,44.7220845 L41.125,22.2822926 C40.4887822,22.4116582 39.8442868,22.4815492 39.198,22.4912623 Z"></path>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <span class="nav-link-text ms-1">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../salesmanager/inventory.html">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fas fa-boxes text-dark"></i>
+            </div>
+            <span class="nav-link-text ms-1">Inventory</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../salesmanager/item-loss.html">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fas fa-exclamation-triangle text-dark"></i>
+            </div>
+            <span class="nav-link-text ms-1">Item Loss</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../salesmanager/sales.html">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fas fa-chart-line text-dark"></i>
+            </div>
+            <span class="nav-link-text ms-1">Sales</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../salesmanager/credit-management.html">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fas fa-credit-card text-dark"></i>
+            </div>
+            <span class="nav-link-text ms-1">Credit Management</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="../salesmanager/cash-utilization.html">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fas fa-money-bill-wave text-dark"></i>
+            </div>
+            <span class="nav-link-text ms-1">Cash Utilization</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../salesmanager/account-management.html">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fas fa-users-cog text-dark"></i>
+            </div>
+            <span class="nav-link-text ms-1">Account Management</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../salesmanager/settings.html">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fas fa-cog text-dark"></i>
+            </div>
+            <span class="nav-link-text ms-1">Settings</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Cash Utilization</li>
+          </ol>
+          <h6 class="font-weight-bolder mb-0">Cash Utilization</h6>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <div class="input-group">
+              
+            </div>
+          </div>
+          <ul class="navbar-nav  justify-content-end">
+            <li class="nav-item d-flex align-items-center">
+              <a href="javascript:;" id="signOutLink" class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-user me-sm-1"></i>
+                <span class="d-sm-inline d-none">Sign Out</span>
+              </a>
+            </li>
+            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                <div class="sidenav-toggler-inner">
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      <!-- Add your dashboard content here -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>Cash Utilization Overview</h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <!-- Add your content here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cash Utilization Dashboard -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h4>Cash Utilization Dashboard</h4>
+              <p class="text-sm text-secondary mb-0">Monitor and analyze cash flow and stock investment</p>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <!-- Total Cash Available Card -->
+                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+                  <div class="card h-100">
+                    <div class="card-body text-center">
+                      <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg mb-3">
+                        <i class="fas fa-money-bill-wave text-white opacity-10"></i>
+                      </div>
+                      <h5 class="mt-3">Total Cash Available</h5>
+                      <h3 class="mb-0" id="total-cash-available-value"></h3>
+                      <button class="btn bg-gradient-primary btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#cashAvailableDetailsModal">View Details</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Today's Expenses Card -->
+                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+                  <div class="card h-100">
+                    <div class="card-body text-center">
+                      <div class="icon icon-shape icon-lg bg-gradient-success shadow text-center border-radius-lg mb-3">
+                        <i class="fas fa-receipt text-white opacity-10"></i>
+                      </div>
+                      <h5 class="mt-3">Today's Expenses</h5>
+                      <h3 class="mb-0" id="todays-expenses-value"></h3>
+                      <button class="btn bg-gradient-success btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#expensesDetailsModal">View Expenses</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Stock Inventory Value Card -->
+                <div class="col-xl-4 col-sm-6">
+                  <div class="card h-100">
+                    <div class="card-body text-center">
+                      <div class="icon icon-shape icon-lg bg-gradient-info shadow text-center border-radius-lg mb-3">
+                        <i class="fas fa-boxes text-white opacity-10"></i>
+                      </div>
+                      <h5 class="mt-3">Stock Inventory Value</h5>
+                      <h3 class="mb-0" id="stock-inventory-value"></h3>
+                      <span id="stock-inventory-value-change"></span>
+                      <button class="btn bg-gradient-info btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#stockInventoryDetailsModal">View Details</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cash Flow Overview -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <div class="row">
+                <div class="col-6">
+                  <h4>Cash Flow Overview</h4>
+                  <p class="text-sm text-secondary mb-0">Track cash in-flows and out-flows</p>
+                </div>
+                
+              </div>
+            </div>
+            <div class="card-body">
+              <div style="height: 400px;">
+                <canvas id="cash-flow-chart"></canvas>
+              </div>
+              <div class="d-flex justify-content-center mt-3">
+                <div class="d-flex align-items-center me-3">
+                  <div class="rounded-circle bg-success" style="width: 10px; height: 10px;"></div>
+                  <span class="text-xs ms-2">Cash In</span>
+                </div>
+                <div class="d-flex align-items-center">
+                  <div class="rounded-circle bg-warning" style="width: 10px; height: 10px;"></div>
+                  <span class="text-xs ms-2">Cash Out</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Center -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h4>Action Center</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <!-- Financial Report Card -->
+                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+                  <div class="card h-100">
+                    <div class="card-body text-center">
+                      <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg mb-3">
+                        <i class="fas fa-chart-pie text-white opacity-10"></i>
+                      </div>
+                      <h5 class="mt-3">Financial Report</h5>
+                      <p class="text-sm text-secondary mb-3">View detailed financial analysis and reports</p>
+                      <button class="btn bg-gradient-primary btn-sm" data-bs-toggle="modal" data-bs-target="#financialReportModal">
+                        <i class="fas fa-file-alt me-1"></i> View Financial Report
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Transaction History Card -->
+                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+                  <div class="card h-100">
+                    <div class="card-body text-center">
+                      <div class="icon icon-shape icon-lg bg-gradient-success shadow text-center border-radius-lg mb-3">
+                        <i class="fas fa-history text-white opacity-10"></i>
+                      </div>
+                      <h5 class="mt-3">Transaction History</h5>
+                      <p class="text-sm text-secondary mb-3">Access complete transaction records and history</p>
+                      <button class="btn bg-gradient-info btn-sm" data-bs-toggle="modal" data-bs-target="#transactionHistoryModal">
+                        <i class="fas fa-history me-1"></i> View Transaction History
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Stock Analysis Card -->
+                <div class="col-xl-4 col-sm-6">
+                  <div class="card h-100">
+                    <div class="card-body text-center">
+                      <div class="icon icon-shape icon-lg bg-gradient-info shadow text-center border-radius-lg mb-3">
+                        <i class="fas fa-boxes text-white opacity-10"></i>
+                      </div>
+                      <h5 class="mt-3">Stock Analysis</h5>
+                      <p class="text-sm text-secondary mb-3">Analyze stock levels and inventory metrics</p>
+                      <button class="btn bg-gradient-warning btn-sm" data-bs-toggle="modal" data-bs-target="#stockAnalysisModal">
+                        <i class="fas fa-chart-bar me-1"></i> View Stock Analysis
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Analytics Section -->
+      <div class="row mt-4">
+        <!-- Cash Utilization Ratio Card -->
+        <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
+          <div class="card h-100">
+            <div class="card-header pb-0">
+              <h4>Cash Utilization Ratio</h4>
+            </div>
+            <div class="card-body">
+              <!-- Month navigation for Cash Utilization Ratio -->
+              <div class="row mb-2 align-items-center justify-content-between" id="cashUtilizationMonthNav">
+                <div class="col d-flex align-items-center justify-content-start">
+                  <button class="btn btn-sm btn-outline-secondary me-2" id="cashUtilizationMonthPrev"><i class="fas fa-chevron-left"></i></button>
+                  <span id="cashUtilizationMonthLabel" class="fw-bold text-md"></span>
+                  <button class="btn btn-sm btn-outline-secondary ms-2" id="cashUtilizationMonthNext"><i class="fas fa-chevron-right"></i></button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <div style="height: 300px;">
+                    <canvas id="cash-utilization-chart"></canvas>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="d-flex flex-column justify-content-center h-100" id="cash-utilization-legend">
+                    <div class="d-flex align-items-center mb-3">
+                      <div class="rounded-circle bg-primary" style="width: 10px; height: 10px;"></div>
+                      <span class="text-xs ms-2 legend-label" data-label="Stock Investment">Stock Investment</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                      <div class="rounded-circle bg-success" style="width: 10px; height: 10px;"></div>
+                      <span class="text-xs ms-2 legend-label" data-label="Operational Expenses">Operational Expenses</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                      <div class="rounded-circle" style="width: 10px; height: 10px; background: #ff5722;"></div>
+                      <span class="text-xs ms-2 legend-label" data-label="Sales">Sales</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <div class="rounded-circle bg-warning" style="width: 10px; height: 10px;"></div>
+                      <span class="text-xs ms-2 legend-label" data-label="Pending Payments">Pending Payments</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top Performing Products Card -->
+        <div class="col-xl-6 col-sm-6">
+          <div class="card h-100">
+            <div class="card-header pb-0">
+              <h4>Top Performing Products by ROI</h4>
+            </div>
+            <div class="card-body">
+              <div style="height: 300px;">
+                <canvas id="roi-chart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- Core JS Files -->
+  <script src="../../assets/js/core/popper.min.js"></script>
+  <script src="../../assets/js/core/bootstrap.min.js"></script>
+  <script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../../assets/js/plugins/chartjs.min.js"></script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Soft Dashboard -->
+  <script src="../../assets/js/soft-ui-dashboard.min.js?v=1.1.0"></script>
+
+  <!-- Financial Report Modal -->
+  <div class="modal fade" id="financialReportModal" tabindex="-1" aria-labelledby="financialReportModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0 flex-column align-items-start">
+          <div class="d-flex align-items-center w-100">
+            <span class="me-2"><i class="fas fa-chart-pie text-primary" style="font-size: 1.3em;"></i></span>
+            <h5 class="modal-title fw-bold mb-0" id="financialReportModalLabel" style="font-size: 20px;">View Financial Report</h5>
+          </div>
+          <hr class="w-100 mt-3 mb-0" style="border-top: 2px solid #eee;">
+          <button type="button" class="btn-close position-absolute end-0 top-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body pt-0">
+          <!-- Add custom month navigation row above summary cards in Financial Report modal -->
+          <div class="row mb-3 align-items-center justify-content-between">
+            <div class="col d-flex align-items-center justify-content-start">
+              <button class="btn btn-sm btn-outline-secondary me-2" id="financialReportMonthPrev"><i class="fas fa-chevron-left"></i></button>
+              <span id="financialReportMonthLabel" class="fw-bold text-md"></span>
+              <button class="btn btn-sm btn-outline-secondary ms-2" id="financialReportMonthNext"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="col-auto ms-auto">
+              <button class="btn btn-outline-secondary btn-sm me-2" id="financialReportExportPDF"><i class="fas fa-file-pdf me-1"></i> Export PDF</button>
+              <button class="btn btn-outline-secondary btn-sm" id="financialReportExportCSV"><i class="fas fa-file-csv me-1"></i> Export CSV</button>
+            </div>
+          </div>
+          <!-- Summary Cards -->
+          <div class="row mb-4">
+            <div class="col-md-4 mb-2">
+              <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                  <div class="text-secondary mb-1">Total Revenue</div>
+                  <h4 class="fw-bold text-success mb-0" id="financial-report-total-revenue"></h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-2">
+              <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                  <div class="text-secondary mb-1">Total Expenses</div>
+                  <h4 class="fw-bold text-danger mb-0" id="financial-report-total-expenses"></h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-2">
+              <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                  <div class="text-secondary mb-1">Net Profit</div>
+                  <h4 class="fw-bold text-primary mb-0" id="financial-report-net-profit"></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Charts Section -->
+          <div class="row mb-4">
+            <div class="col-md-6 mb-3">
+              <div class="card h-100 p-3">
+                <h6 class="fw-bold mb-3"><i class="fas fa-chart-pie me-2 text-primary"></i>Expense vs Revenue vs Profit</h6>
+                <div style="height: 250px;">
+                  <canvas id="expenseRevenuePieChart"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <div class="card h-100 p-3">
+                <h6 class="fw-bold mb-3"><i class="fas fa-chart-line me-2 text-success"></i>Monthly Profit Trend</h6>
+                <div style="height: 250px; overflow-x: auto;">
+                  <div style="width: 1200px; min-width: 600px;">
+                    <canvas id="profitTrendLineChart" width="1200" height="250"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer border-0 justify-content-end">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Transaction History Modal -->
+  <div class="modal fade" id="transactionHistoryModal" tabindex="-1" aria-labelledby="transactionHistoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0 flex-column align-items-start">
+          <div class="d-flex align-items-center w-100">
+            <span class="me-2"><i class="fas fa-history text-info" style="font-size: 1.3em;"></i></span>
+            <h5 class="modal-title fw-bold mb-0" id="transactionHistoryModalLabel" style="font-size: 20px;">View Transaction History</h5>
+          </div>
+          <hr class="w-100 mt-3 mb-0" style="border-top: 2px solid #eee;">
+          <button type="button" class="btn-close position-absolute end-0 top-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body pt-0">
+          <!-- Search & Filters -->
+          <form class="row g-2 mb-4 align-items-end">
+            <div class="col-md-3">
+              <label class="form-label mb-1">Filter By</label>
+              <input type="date" class="form-control form-control-sm" id="transactionHistoryDateInput">
+            </div>
+          </form>
+          <!-- Transaction Table -->
+          <div class="table-responsive mb-4">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="bg-light">
+                <tr>
+                  <th class="fw-bold">Customer</th>
+                  <th class="fw-bold">Items</th>
+                  <th class="fw-bold">Amount</th>
+                  <th class="fw-bold">Payment Method</th>
+                </tr>
+              </thead>
+              <tbody id="transactionHistoryTableBody">
+                <!-- Transaction history rows will be dynamically rendered here -->
+              </tbody>
+            </table>
+          </div>
+          <!-- Pagination Controls for Transaction History -->
+          <div class="d-flex justify-content-between align-items-center mt-3" id="transactionHistoryPaginationControls">
+            <div>
+              <span id="transactionHistoryShowingText" class="text-sm text-secondary">Showing 1 to 10 of 0 items</span>
+            </div>
+            <div class="d-flex align-items-center">
+              <button class="btn btn-sm btn-outline-secondary me-2" id="transactionHistoryPrevPage" title="Previous"><i class="fas fa-chevron-left"></i></button>
+              <span id="transactionHistoryCurrentPageInfo" class="badge bg-primary px-3 py-2">Page 1 of 1</span>
+              <button class="btn btn-sm btn-outline-secondary ms-2" id="transactionHistoryNextPage" title="Next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer border-0 justify-content-end">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Stock Analysis Modal -->
+  <div class="modal fade" id="stockAnalysisModal" tabindex="-1" aria-labelledby="stockAnalysisModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0 flex-column align-items-start">
+          <div class="d-flex align-items-center w-100">
+            <span class="me-2"><i class="fas fa-chart-bar text-warning" style="font-size: 1.3em;"></i></span>
+            <h5 class="modal-title fw-bold mb-0" id="stockAnalysisModalLabel" style="font-size: 20px;">View Stock Analysis</h5>
+          </div>
+          <hr class="w-100 mt-3 mb-0" style="border-top: 2px solid #eee;">
+          <button type="button" class="btn-close position-absolute end-0 top-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body pt-0">
+          <!-- Stock Summary Cards -->
+          <div class="row mb-4">
+            <div class="col-md-4 mb-2">
+              <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                  <div class="text-secondary mb-1">Total SKUs</div>
+                  <h4 class="fw-bold text-primary mb-0" id="stock-analysis-total-skus">...</h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-2">
+              <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                  <div class="text-secondary mb-1">Low Stock Items</div>
+                  <h4 class="fw-bold text-danger mb-0" id="stock-analysis-low-stock">...</h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-2">
+              <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                  <div class="text-secondary mb-1">Recently Received</div>
+                  <h4 class="fw-bold text-success mb-0" id="stock-analysis-recently-received">...</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Product Search, Filter, and Export -->
+          <div class="row align-items-center mb-3">
+            <div class="col-md-8 d-flex flex-wrap gap-2 align-items-center">
+              <label class="mb-0 me-2 text-secondary">Filter by:</label>
+              <select id="stockAnalysisStatusSelect" class="form-select form-select-sm w-auto" style="min-width: 130px;">
+                <option value="">All Stock</option>
+                <option value="in">In Stock</option>
+                <option value="out">Out of Stock</option>
+              </select>
+              <div class="input-group" style="width: 250px; height: 38px;">
+                <span class="input-group-text bg-white border-end-0"><i class="fas fa-search"></i></span>
+                <input type="text" id="stockAnalysisSearchInput" class="form-control form-control-sm border-start-0" placeholder="Search products..." style="height: 38px;">
+              </div>
+            </div>
+            <div class="col-md-4 d-flex justify-content-end gap-2">
+              <button class="btn btn-outline-secondary btn-sm" id="exportStockAnalysisPDF" onclick="exportStockAnalysisToPDF()"><i class="fas fa-file-pdf me-1"></i> Export PDF</button>
+              <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-file-csv me-1"></i> Export CSV</button>
+            </div>
+          </div>
+          <!-- Inventory Table -->
+          <div class="table-responsive" style="height: 300px;">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="bg-light">
+                <tr>
+                  <th class="fw-bold">Item Name</th>
+                  <th class="fw-bold">Current Stock</th>
+                  <th class="fw-bold">Unit Price</th>
+                  <th class="fw-bold">Total Cost</th>
+                  <th class="fw-bold">Last Received</th>
+                </tr>
+              </thead>
+              <tbody id="stockAnalysisTableBody">
+                <!-- Inventory details will be dynamically added here -->
+              </tbody>
+            </table>
+          </div>
+          <!-- Pagination Controls for Stock Analysis Table -->
+          <div class="d-flex justify-content-between align-items-center mt-3" id="stockAnalysisPaginationControls">
+            <div>
+              <span id="stockAnalysisShowingText" class="text-sm text-secondary">Showing 1 to 4 of 0 items</span>
+            </div>
+            <div class="d-flex align-items-center">
+              <button class="btn btn-sm btn-outline-secondary me-2" id="stockAnalysisPrevPage" title="Previous"><i class="fas fa-chevron-left"></i></button>
+              <span id="stockAnalysisCurrentPageInfo" class="badge bg-primary px-3 py-2">Page 1 of 1</span>
+              <button class="btn btn-sm btn-outline-secondary ms-2" id="stockAnalysisNextPage" title="Next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>
+          <!-- Charts Section -->
+          <div class="row mb-4">
+            <div class="col-md-6 mb-3">
+              <div class="card h-100 p-3">
+                <h6 class="fw-bold mb-3"><i class="fas fa-chart-bar me-2 text-warning"></i>All Items by Stock Value</h6>
+                <div style="height: 250px; overflow-x: auto;">
+                  <div style="min-width: 600px; width: max-content;">
+                    <canvas id="topStockValueBarChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <div class="card h-100 p-3">
+                <h6 class="fw-bold mb-3"><i class="fas fa-exchange-alt me-2 text-info"></i>Stock Movement Trend</h6>
+                <div style="height: 250px;">
+                  <canvas id="stockMovementLineChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer border-0 justify-content-end">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Stock Inventory Details Modal -->
+  <div class="modal fade" id="stockInventoryDetailsModal" tabindex="-1" aria-labelledby="stockInventoryDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="stockInventoryDetailsModalLabel">
+            <i class="fas fa-boxes me-2 text-info"></i>Stock Inventory Details
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Date Selection Area -->
+          <div class="mb-4">
+            <label for="stockInventoryDate" class="form-label"><i class="fas fa-calendar-alt me-2 text-info"></i>Select Date</label>
+            <input type="date" class="form-control w-auto d-inline-block" id="stockInventoryDate" value="">
+          </div>
+          <!-- Inventory Table Section -->
+          <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Items</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Quantity</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total Amount</th>
+                </tr>
+              </thead>
+              <tbody id="stockInventoryDetailsTableBody">
+                <!-- Inventory details will be dynamically added here -->
+              </tbody>
+            </table>
+          </div>
+          <!-- Pagination Controls for Stock Inventory Details -->
+          <div class="d-flex justify-content-between align-items-center mt-3" id="stockInventoryPaginationControls">
+            <div>
+              <span id="stockInventoryShowingText" class="text-sm text-secondary">Showing 1 to 4 of 0 items</span>
+            </div>
+            <div class="d-flex align-items-center">
+              <button class="btn btn-sm btn-outline-secondary me-2" id="stockInventoryPrevPage" title="Previous"><i class="fas fa-chevron-left"></i></button>
+              <span id="stockInventoryCurrentPageInfo" class="badge bg-primary px-3 py-2">Page 1 of 1</span>
+              <button class="btn btn-sm btn-outline-secondary ms-2" id="stockInventoryNextPage" title="Next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-end">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fas fa-times me-2"></i>Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Expenses Details Modal -->
+  <div class="modal fade" id="expensesDetailsModal" tabindex="-1" aria-labelledby="expensesDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="expensesDetailsModalLabel">
+            <i class="fas fa-receipt me-2 text-success"></i>Expenses Details
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Date Selection Area -->
+          <div class="mb-4">
+            <label for="expensesDetailsDate" class="form-label"><i class="fas fa-calendar-alt me-2 text-info"></i>Select Date</label>
+            <input type="date" class="form-control w-auto d-inline-block" id="expensesDetailsDate" value="">
+          </div>
+          <!-- Expenses Table Section -->
+          <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Purpose</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>
+                </tr>
+              </thead>
+              <tbody id="expensesDetailsTableBody">
+                <!-- Expenses details will be dynamically added here -->
+              </tbody>
+            </table>
+          </div>
+          <!-- Pagination Controls for Expenses Details -->
+          <div class="d-flex justify-content-between align-items-center mt-3" id="expensesPaginationControls">
+            <div>
+              <span id="expensesShowingText" class="text-sm text-secondary">Showing 1 to 4 of 0 items</span>
+            </div>
+            <div class="d-flex align-items-center">
+              <button class="btn btn-sm btn-outline-secondary me-2" id="expensesPrevPage" title="Previous"><i class="fas fa-chevron-left"></i></button>
+              <span id="expensesCurrentPageInfo" class="badge bg-primary px-3 py-2">Page 1 of 1</span>
+              <button class="btn btn-sm btn-outline-secondary ms-2" id="expensesNextPage" title="Next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-end">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fas fa-times me-2"></i>Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Cash Available Details Modal -->
+  <div class="modal fade" id="cashAvailableDetailsModal" tabindex="-1" aria-labelledby="cashAvailableDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cashAvailableDetailsModalLabel">
+            <i class="fas fa-money-bill-wave me-2 text-primary"></i>Today's Sales Report
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Date Selection Area -->
+          <div class="mb-4">
+            <label for="cashAvailableDetailsDate" class="form-label"><i class="fas fa-calendar-alt me-2 text-info"></i>Select Date</label>
+            <input type="date" class="form-control w-auto d-inline-block" id="cashAvailableDetailsDate" value="">
+          </div>
+          <!-- Sales Table Section -->
+          <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer Name</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Items</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total Amount</th>
+                </tr>
+              </thead>
+              <tbody id="cashAvailableDetailsTableBody">
+                <!-- Sales details will be dynamically added here -->
+              </tbody>
+            </table>
+          </div>
+          <!-- Pagination Controls for Cash Available Details -->
+          <div class="d-flex justify-content-between align-items-center mt-3" id="cashAvailablePaginationControls">
+            <div>
+              <span id="cashAvailableShowingText" class="text-sm text-secondary">Showing 1 to 4 of 0 items</span>
+            </div>
+            <div class="d-flex align-items-center">
+              <button class="btn btn-sm btn-outline-secondary me-2" id="cashAvailablePrevPage" title="Previous"><i class="fas fa-chevron-left"></i></button>
+              <span id="cashAvailableCurrentPageInfo" class="badge bg-primary px-3 py-2">Page 1 of 1</span>
+              <button class="btn btn-sm btn-outline-secondary ms-2" id="cashAvailableNextPage" title="Next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>
+          <!-- Summary Row for Totals (moved below pagination) -->
+          <div class="row mt-3">
+            <div class="col-md-6 col-lg-5">
+              <div class="card card-body p-3 bg-gray-100">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <div class="fw-bold text-end text-nowrap">Total Sales Amount:</div>
+                  <div id="cashAvailableTotalSales">shs:0.00</div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <div class="fw-bold text-end text-nowrap">Total Expense Amount:</div>
+                  <div id="cashAvailableTotalExpenses">shs:0.00</div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="fw-bold text-end text-nowrap">Total Cash Available:</div>
+                  <div id="cashAvailableNetCash">shs:0.00</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-end">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fas fa-times me-2"></i>Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+     <script src="cash-utilization.js"></script>
+   <script>
+   // Ensure PDF export function is available globally
+       window.exportStockAnalysisToPDF = async function() {
+      console.log('PDF export function called from HTML script');
+     try {
+       // Show loading state
+       const exportBtn = document.getElementById('exportStockAnalysisPDF');
+       if (!exportBtn) {
+         console.error('Export button not found');
+         return;
+       }
+       const originalText = exportBtn.innerHTML;
+       exportBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Generating PDF...';
+       exportBtn.disabled = true;
+
+       // Get current date and time for filename
+       const now = new Date();
+       const dateStr = now.toLocaleDateString('en-GB').replace(/\//g, '-');
+       const timeStr = now.toLocaleTimeString('en-GB').replace(/:/g, '-');
+       const filename = `Stock_Analysis_Report_${dateStr}_${timeStr}.pdf`;
+
+       // Create new jsPDF instance
+       if (!window.jspdf) {
+         console.error('jsPDF library not loaded');
+         throw new Error('jsPDF library not available');
+       }
+       const { jsPDF } = window.jspdf;
+       const doc = new jsPDF();
+
+       // Add title
+       doc.setFontSize(20);
+       doc.setFont('helvetica', 'bold');
+       doc.text('Stock Analysis Report', 105, 20, { align: 'center' });
+
+       // Add date and time
+       doc.setFontSize(12);
+       doc.setFont('helvetica', 'normal');
+       doc.text(`Generated on: ${now.toLocaleDateString()} at ${now.toLocaleTimeString()}`, 105, 30, { align: 'center' });
+
+       // Add summary information
+       doc.setFontSize(14);
+       doc.setFont('helvetica', 'bold');
+       doc.text('Summary', 20, 45);
+
+       // Get summary data from the modal
+       const totalSKUs = document.getElementById('stock-analysis-total-skus')?.textContent || 'N/A';
+       const lowStockItems = document.getElementById('stock-analysis-low-stock')?.textContent || 'N/A';
+       const recentlyReceived = document.getElementById('stock-analysis-recently-received')?.textContent || 'N/A';
+
+       doc.setFontSize(10);
+       doc.setFont('helvetica', 'normal');
+       doc.text(`Total SKUs: ${totalSKUs}`, 20, 55);
+       doc.text(`Low Stock Items: ${lowStockItems}`, 20, 62);
+       doc.text(`Recently Received: ${recentlyReceived}`, 20, 69);
+
+       // Get all stock analysis data (not just current page)
+       let allStockData = [];
+       
+       // If we have cached data, use it
+       if (window.stockAnalysisCache && window.stockAnalysisCache.length > 0) {
+         allStockData = window.stockAnalysisCache;
+       } else {
+         // Fetch fresh data if cache is empty
+         try {
+           const response = await fetch(API_BASE_URL + '/api/items/stock-table');
+           const data = await response.json();
+           allStockData = data.items || [];
+         } catch (error) {
+           console.error('Error fetching stock data for PDF:', error);
+           allStockData = [];
+         }
+       }
+
+       // Prepare table data
+       const tableData = allStockData.map(item => [
+         item.name || 'N/A',
+         item.currentStock ? item.currentStock.toString() : 'N/A',
+         item.unitPrice ? `shs:${Number(item.unitPrice).toLocaleString()}` : 'N/A',
+         item.totalCost ? `shs:${Number(item.totalCost).toLocaleString()}` : 'N/A',
+         item.lastReceived || 'N/A'
+       ]);
+
+       // Add table title
+       doc.setFontSize(14);
+       doc.setFont('helvetica', 'bold');
+       doc.text('Stock Inventory Details', 20, 85);
+
+       // Create table
+       doc.autoTable({
+         startY: 90,
+         head: [['Item Name', 'Current Stock', 'Unit Price', 'Total Cost', 'Last Received']],
+         body: tableData,
+         theme: 'grid',
+         headStyles: {
+           fillColor: [41, 128, 185],
+           textColor: 255,
+           fontStyle: 'bold'
+         },
+         styles: {
+           fontSize: 8,
+           cellPadding: 3
+         },
+         columnStyles: {
+           0: { cellWidth: 50 }, // Item Name
+           1: { cellWidth: 25 }, // Current Stock
+           2: { cellWidth: 30 }, // Unit Price
+           3: { cellWidth: 30 }, // Total Cost
+           4: { cellWidth: 35 }  // Last Received
+         },
+         margin: { top: 90, left: 20, right: 20 }
+       });
+
+       // Convert charts to images and add to PDF
+       try {
+         // Get chart canvases
+         const topStockChart = document.getElementById('topStockValueBarChart');
+         const stockMovementChart = document.getElementById('stockMovementLineChart');
+         
+         if (topStockChart && stockMovementChart) {
+           // Get the final Y position after the table
+           const tableEndY = doc.lastAutoTable.finalY || 120;
+           
+           // Check if we need a new page for charts
+           const chartsStartY = tableEndY + 20;
+           if (chartsStartY > doc.internal.pageSize.height - 60) {
+             doc.addPage();
+           }
+           
+           // Add charts section title
+           doc.setFontSize(14);
+           doc.setFont('helvetica', 'bold');
+           doc.text('Stock Analysis Charts', 20, chartsStartY);
+           
+           // Convert first chart to image
+           const topStockImage = topStockChart.toDataURL('image/png');
+           doc.addImage(topStockImage, 'PNG', 20, chartsStartY + 10, 80, 40);
+           doc.setFontSize(10);
+           doc.setFont('helvetica', 'normal');
+           doc.text('All Items by Stock Value', 20, chartsStartY + 55);
+           
+           // Convert second chart to image
+           const stockMovementImage = stockMovementChart.toDataURL('image/png');
+           doc.addImage(stockMovementImage, 'PNG', 110, chartsStartY + 10, 80, 40);
+           doc.setFontSize(10);
+           doc.setFont('helvetica', 'normal');
+           doc.text('Stock Movement Trend', 110, chartsStartY + 55);
+         }
+       } catch (chartError) {
+         console.warn('Could not include charts in PDF:', chartError);
+         // Continue without charts if there's an error
+       }
+
+       // Add footer
+       const pageCount = doc.internal.getNumberOfPages();
+       for (let i = 1; i <= pageCount; i++) {
+         doc.setPage(i);
+         doc.setFontSize(8);
+         doc.setFont('helvetica', 'italic');
+         doc.text(`Page ${i} of ${pageCount}`, 105, doc.internal.pageSize.height - 10, { align: 'center' });
+       }
+
+       // Save the PDF
+       doc.save(filename);
+
+       // Reset button state
+       exportBtn.innerHTML = originalText;
+       exportBtn.disabled = false;
+
+       // Show success message
+       if (window.showNotification) {
+         window.showNotification('PDF exported successfully!', 'success');
+       }
+
+     } catch (error) {
+       console.error('Error generating PDF:', error);
+       
+       // Reset button state
+       const exportBtn = document.getElementById('exportStockAnalysisPDF');
+       if (exportBtn) {
+         exportBtn.innerHTML = '<i class="fas fa-file-pdf me-1"></i> Export PDF';
+         exportBtn.disabled = false;
+       }
+       
+       // Show error message
+       if (window.showNotification) {
+         window.showNotification('Error generating PDF. Please try again.', 'error');
+       }
+     }
+   };
+   
+   console.log('PDF export function defined in HTML script');
+   </script>
+  <script>
+document.getElementById('signOutLink').addEventListener('click', function(e) {
+  e.preventDefault();
+  localStorage.removeItem('authToken'); // Remove the token on sign out
+  window.location.href = '../sign-in.html';
+});
+</script>
+</body>
+
+</html> 

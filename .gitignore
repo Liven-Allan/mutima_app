@@ -1,0 +1,33 @@
+# -----------------------------------------------------------------
+# Environment Variables & Secrets
+# NEVER commit credentials or sensitive data!
+# The user provided .env file is currently in the root directory
+# and must be ignored.
+.env
+*.env
+*.env.*
+# -----------------------------------------------------------------
+# Dependencies
+# Installed Node.js packages
+node_modules/
+# Installed Python packages (for docker-compose trace/system dependencies)
+__pycache__/
+# -----------------------------------------------------------------
+# Operating System files
+.DS_Store
+Thumbs.db
+# -----------------------------------------------------------------
+# Logs and Temp files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+# -----------------------------------------------------------------
+# Docker Artifacts
+*.swp
+*.bak
+.dockerignore
+# -----------------------------------------------------------------
+# Output/Build directories (If your frontend generates a 'dist' folder)
+# dist/
+# build/
